@@ -33,7 +33,11 @@
 - `strerror(int errnum)` → 에러 번호에 대응하는 문자열 반환
 
 ### 📐 수학 계열 (Math / libm)
-- `sqrt(double x)` → 제곱근
+- `double sqrt(double x)` : 제곱근
+    ```c
+    #include <math.h>
+    int square = sqrt(1000); // 31.xx 반환 후 int 자료형에는 소수값을 버리고 31을 저장한다
+    ```
 - `pow(double x, double y)` → x^y 계산
 - `fabs(double x)` → 절댓값
 - `exp(double x)` → e^x 계산
@@ -56,10 +60,18 @@
 - `frexp(double x, int* exp)` → x = mantissa × 2^exp 로 분해
 
 ### 🧠 동적 메모리 관리 (Heap Management)
-- `malloc(size_t size)` → size 바이트 동적 할당
+- `void* malloc(size_t size)` : 동적 메모리 할당
+  ```c
+  #include <stdlib.h> // or <malloc.h>
+  int* arr = (int*) malloc(sizeof(int) * 4); // 크기 4 인 정수 배열 동적 할당
+  ```
 - `calloc(size_t nmemb, size_t size)` → 0으로 초기화된 메모리 할당
 - `realloc(void* ptr, size_t size)` → 크기 조정된 새 메모리 반환
-- `free(void* ptr)` → 메모리 해제
+- `void free(void* memblock)` : 동적 할당된 메모리 해제
+  ```c
+  #include <stdlib.h> // or <malloc.h>
+  free(arr); // 이중 포인터에 할당한 경우가 아니라면 항상 이렇게
+  ```
 
 ### 🔍 검색 / 정렬
 - `qsort(void* base, size_t n, size_t size, int (*cmp)(const void*, const void*))` → 일반화된 정렬
