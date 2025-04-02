@@ -7,13 +7,15 @@ int main()
     char* inputString = (char*)malloc(sizeof(char)*inputLength);
 	scanf("%s",inputString);
     
-    int output=0;
+    unsigned long output=0;
     while(inputLength--!=0)
     {
-		int hash = inputString[inputLength]-'a'+1;
-        for(int i=0;i<inputLength;i++) hash*=31;
-        output += hash;
+		unsigned long hash = inputString[inputLength]-'a'+1;
+        for(int i=0;i<inputLength;i++) 
+			if((hash*=31)>1234567891)
+				hash%=1234567891;
+        if((output+=hash)>1234567891) output%=1234567891;
     }
     
-    printf("%d",output);
+    printf("%lu",output);
 }
